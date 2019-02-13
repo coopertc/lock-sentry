@@ -21,7 +21,7 @@ if __name__ == "__main__":
 		count += 1
 		abs_path = "%s/%s" % (subject_path, filename)
 		if count == 10:
-		    Test.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname[1:])))
+		    Test.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname)))
 		else:
-		    Train.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname[1:])))
+		    Train.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname)))
 	    label = label+1

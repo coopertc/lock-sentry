@@ -1,16 +1,25 @@
 import numpy as np
 import cv2
 import csv
+import sys
+import os
 
 cap = cv2.VideoCapture(1)
 cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 
+label = str(sys.argv[1])
+
+directory_path = "./orl_faces/s" + label + "/"
+
+if not os.path.exists(directory_path):
+    os.makedirs(directory_path)
+
 i = 0
 while(i < 15):
     ret, frame = cap.read()
     #frame = cv2.imread('steve.jpg', 1);
-    #cv2.imshow('frame', frame)
+    cv2.imshow('frame', frame)
     
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
@@ -30,7 +39,8 @@ while(i < 15):
 	#print resize_img.shape
 	#pred, dist = model.predict(resize_img)
 	#print "pred label: ", pred, "distance: ", dist
-	imgPath = "./orl_faces/s41/" + str(i) + ".pgm" 
+	imgPath = directory_path + str(i) + ".pgm"
+	print imgPath
 	i += 1
         cv2.imwrite(imgPath, resize_img)
 	cv2.waitKey(1)
