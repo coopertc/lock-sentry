@@ -10,7 +10,7 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 
 label = str(sys.argv[1])
 
-directory_path = "./orl_faces/s" + label + "/"
+directory_path = "./faces/" + label + "/"
 
 if not os.path.exists(directory_path):
     os.makedirs(directory_path)
@@ -27,20 +27,22 @@ while(i < 15):
         frame,
         scaleFactor=1.5,
 	minNeighbors=5,
-	minSize=(30,30),
+	minSize=(60,60),
 	flags=cv2.cv.CV_HAAR_SCALE_IMAGE
     )
-    for(x,y,w,h) in faces:
-	print 'face detected'
-        # cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 2)
-        crop_img = frame[y:y+h, x:x+w]
-        #height, width, depth = crop_img.shape
-        resize_img = cv2.resize(crop_img, (92,112))
-	#print resize_img.shape
-	#pred, dist = model.predict(resize_img)
-	#print "pred label: ", pred, "distance: ", dist
-	imgPath = directory_path + str(i) + ".pgm"
-	print imgPath
-	i += 1
-        cv2.imwrite(imgPath, resize_img)
-	cv2.waitKey(1)
+    print len(faces)
+    for (x,y,w,h) in faces:
+         cv2.imshow('face', frame[y:y+h, x:x+h])
+         cv2.waitKey()
+    
+    (x,y,w,h) = faces[0]
+    crop_img = frame[y:y+h, x:x+w]
+
+    resize_img = cv2.resize(crop_img, (200,300))
+
+    imgPath = directory_path + str(i) + ".jpg"
+    print imgPath
+    i += 1
+    cv2.imwrite(imgPath, resize_img)
+    cv2.waitKey(1)
+    

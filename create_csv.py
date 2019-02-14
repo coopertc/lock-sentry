@@ -20,8 +20,9 @@ if __name__ == "__main__":
 	    for filename in os.listdir(subject_path):
 		count += 1
 		abs_path = "%s/%s" % (subject_path, filename)
-		if count == 10:
+		'''if count == 10:
 		    Test.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname)))
-		else:
-		    Train.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname)))
+		else:'''
+		Train.write("%s%s%d\n" % (abs_path, SEPARATOR, int(subdirname)))
+		
 	    label = label+1
